@@ -281,3 +281,4 @@ cython_debug/
 
 .idea
 *.idea
+*./base/migrations
