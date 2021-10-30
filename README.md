@@ -1,9 +1,34 @@
-<H1>half-brain-coders</H1>
 
-W terminalu wpisujecie
->python manage.py makemigrations
+# Projekt Zaawansowane aplikacje internetowe
 
->python manage.py migrate
+#### Tu będzie logo xD
+![Logo](https://paczaizm.pl/content/wp-content/uploads/dziekan-rektor-studenci-malpy-9k-zarazen-where-zdalne.jpg)
 
-Tu tworzycie superusera zeby sie dostać do http://127.0.0.1:8000/admin
->python manage.py createsuperuser 
+
+## Komendy
+
+#### Uruchamia makemigrations, migrate i tworzy użytkowników: admin & user
+
+```
+python manage.py base
+```
+
+#### Tworzenie/usuwanie użytkowników
+
+```
+python manage.py user [--delete]
+```
+
+| Parametr | Opis                      |
+| :-------- | :-------------------------------- |
+| `--delete`      | **Opcjonalne**. Usuwa użytkowników |
+
+#### Usuwanie wszystkich migracji
+
+```
+python manage.py dmigration [--all]
+```
+
+| Parametr | Opis                      |
+| :-------- | :-------------------------------- |
+| `--all`      | **Opcjonalne**. Usuwa dodatkowo bazę db.sqlite3 |
