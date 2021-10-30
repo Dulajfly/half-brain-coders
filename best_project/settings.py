@@ -130,3 +130,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_URL = 'login'
+
+
+# Przykładowi użytkownicy dla projektu
+# sprawdź komendę python manage.py base
+
+SAMPLE_USERS = [
+    ('user', 'user123'),
+    ('admin', 'admin123')
+]
