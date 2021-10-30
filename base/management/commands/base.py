@@ -1,8 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from django.contrib.auth.models import User, Group
-from django.conf import settings
 from django.core import management
-from django.core.management import call_command
 
 
 class Command(BaseCommand):
@@ -15,7 +12,7 @@ class Command(BaseCommand):
             print('Running migrate...')
             management.call_command('migrate')
             print('Creating sample users...\n')
-            management.call_command('createusers')
+            management.call_command('user')
             print('\nThe command completed the work successfully, now you can run project')
         except:
             print('ERROR!')
