@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6t2p2asvg$knosc$@sb0aez^s7*b9lk_07-vfu8n*)+^)#m*lv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
+    'django_countries',
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -131,6 +134,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'login'
 
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TSL = True
+EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
 
 # Przykładowi użytkownicy dla projektu
 # sprawdź komendę python manage.py base

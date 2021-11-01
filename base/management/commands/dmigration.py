@@ -25,6 +25,6 @@ class Command(BaseCommand):
                 os.remove('db.sqlite3')
         self.__get_migration_directory()
         for file in os.listdir():
-            if file.startswith('0') and file.endswith('initial.py'):
+            if file.startswith('0'):
                 print('Removed file: {}'.format(file))
                 os.remove(file)
