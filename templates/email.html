@@ -1,7 +1,9 @@
-Serwus {{ username }}
-Dziękujemy za rejestracje w serwisie Half brain spółka w zoo.
+{% autoescape off %}
+{% csrf_token %}
+Hello {{ username }}
+Please click on the link to confirm your registration,
+http://127.0.0.1:8000{% url 'activate_account' uidb64=uid token=token %}
 
-ps. Zalecamy usunąć konto jak najszybciej
-
-Pozdrawiamy
+Truly love,
 spółka w zoo
+{% endautoescape %}

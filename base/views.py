@@ -1,21 +1,27 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django.utils.translation import get_language, activate
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text, force_str
 
 from django.views.generic.edit import FormView
 
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.sites.shortcuts import get_current_site
 
 from .forms import RegisterForm, ExitPointForm
 import smtplib
 
-from django.conf import settings
+from best_project import settings
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage, send_mail, BadHeaderError
-from django.utils.translation import get_language, activate
+from django.core.mail import EmailMessage
+
+from .tokens import account_activation_token
+from django.contrib.auth.models import User
+
 
 class Login(LoginView):
     # model = User
@@ -26,6 +32,23 @@ class Login(LoginView):
     def get_success_url(self):
         return reverse_lazy('base')
 
+
+def activate_account(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64)).encode()
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return HttpResponse('Dziemki Za potwierdzenie maila XD')
+    else:
+        return HttpResponse('Invalid link')
+
+
+# Neovo123!
 class RegisterPage(FormView):
     template_name = 'user/register.html'
     form_class = RegisterForm
@@ -33,11 +56,12 @@ class RegisterPage(FormView):
 
     def form_valid(self, form):
         user = form.save()
-        print('user1 ', self.request.POST['email'])
+        # print('user1 ', self.request.POST['email'])
         if user is not None:
-            login(self.request, user)
-            print('user', user)
-            # self._send_mail()
+            user.is_active = False
+            user.save()
+            # login(self.request, user)
+            self.send_email_confirmation(user)
         return super(RegisterPage, self).form_valid(form)
 
     def get(self, *args, **kwargs):
@@ -47,6 +71,23 @@ class RegisterPage(FormView):
 
     def get_success_url(self):
         return reverse_lazy('base')
+
+    def send_email_confirmation(self, user):
+        template = render_to_string(
+            'email.html',
+            {'username': self.request.user.username,
+             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+             'token': account_activation_token.make_token(user),
+             })
+        email = EmailMessage(
+            'Find Ur Exit - Activate your account',
+            template,
+            settings.EMAIL_HOST_USER,
+            [user.email],
+        )
+        email.fail_silently = False
+        email.send()
+
 
 class ExitPointView(LoginRequiredMixin, FormView):
     template_name = 'exitpoint.html'
@@ -60,14 +101,44 @@ class ExitPointView(LoginRequiredMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('base')
 
-def mail_wysylam(request):
-    subject = 'Moj temat'
-    message = 'moja wiadomosc'
-    send_mail(subject, message, 'project.half.brain@gmail.com', ['project.half.brain@gmail.com'], fail_silently=False)
-    return HttpResponse('Udalo sie!')
 
-# def register_confirm_mail(request):
-#     EmailMessage
+# def mail_wysylam(request):
+#     subject = 'Moj temat'
+#     message = 'moja wiadomosc'
+#     send_mail(subject, message, 'project.half.brain@gmail.com', ['project.half.brain@gmail.com'], fail_silently=False)
+#     return HttpResponse('Udalo sie!')
+
+# def send_email_confirmation(request):
+#     template = render_to_string(
+#         'email.html',
+#         {'username': request.user.username,
+#          'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
+#          'token': account_activation_token.make_token(request.user),
+#          })
+#     email = EmailMessage(
+#         'Find Ur Exit - Activate your account',
+#         template,
+#         settings.EMAIL_HOST_USER,
+#         [request.user.email],
+#     )
+#     email.fail_silently=False
+#     email.send()
+#     print('Confirm your email address')
+#
+# def activate_account(request, uidb64, token):
+#     try:
+#         uid = force_text(urlsafe_base64_decode(uidb64))
+#         user = User.objects.get(pk=uid)
+#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+#         user = None
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+#         login(request, user)
+#         return HttpResponse('Dziemki Za potwierdzenie maila XD')
+#     else:
+#         return HttpResponse('Invalid link')
+
 
 def index(request):
     trans = translate(language='pl')
@@ -86,5 +157,3 @@ def translate(language):
     finally:
         activate(cur_language)
     return text
-
-
