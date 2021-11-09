@@ -11,6 +11,7 @@ from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.decorators import login_required
 
 from .forms import RegisterForm, ExitPointForm
 import smtplib
@@ -139,7 +140,7 @@ class ExitPointView(LoginRequiredMixin, FormView):
 #     else:
 #         return HttpResponse('Invalid link')
 
-
+@login_required()
 def index(request):
     trans = translate(language='pl')
     projekt = _('hello')

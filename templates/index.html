@@ -8,19 +8,22 @@
     <title>Title</title>
 </head>
 <body>
+{% block helper %}
 <h1>Base page</h1>
 <h1>Witaj {{ request.user }}!</h1>
     {{ projekt }}
     {{ trans }}
     {{ slowa }}
+{% endblock helper %}
     <div class="container">
         {% block content %}
 
         {% endblock %}
     <p><a href="{% url 'logout' %}">logout</a></p>
     </div>
-<p><a href="{% url 'exitpoint' %}">add exit point</a></p>
 
+{% block app %}
+<p><a href="{% url 'exitpoint' %}">add exit point</a></p>
 
 
 {% get_current_language as LANGUAGE_CODE %}
@@ -34,7 +37,7 @@
     </a>
 </li>
 {% endfor %}
-
+{% endblock app %}
 
 
 {#<form action="{% url 'contact' %}" method="post">#}
