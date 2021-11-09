@@ -1,0 +1,9 @@
+{% autoescape off %}
+{% csrf_token %}
+Hello {{ username }}
+Please click on the link to confirm your registration,
+http://127.0.0.1:8000{% url 'activate_account' uidb64=uid token=token %}
+
+Truly love,
+spółka w zoo
+{% endautoescape %}

@@ -1,0 +1,9 @@
+{% load i18n %}
+<h1>Login page</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Login">
+</form>
+<p><a href="{% url 'register' %}">register</a></p>

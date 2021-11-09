@@ -1,0 +1,12 @@
+{% load i18n %}
+<h1>{% trans "Register" %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field.label_tag }}
+            <p>{{ field }}</p>
+        {% endfor %}
+    <input type="submit" value="Register">
+    </form>
+<a href={% url 'login' %}>Login</a>
