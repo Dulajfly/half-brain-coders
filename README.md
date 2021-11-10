@@ -32,3 +32,13 @@ python manage.py dmigration [--all]
 | Parametr | Opis                      |
 | :-------- | :-------------------------------- |
 | `--all`      | **Opcjonalne**. Usuwa dodatkowo bazę db.sqlite3 |
+
+## React
+
+W katalogu projektu wpisujemy:
+#### `cd frontend`
+#### `npm install`
+#### `npm start`
+
+Domyślny adres serwera:
+[http://localhost:3000](http://localhost:3000) 
