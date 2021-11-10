@@ -13,6 +13,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 
+from rest_framework import viewsets
+from .models import *
+from .serializers import *
+from rest_framework.permissions import AllowAny
+
 from .forms import RegisterForm, ExitPointForm
 import smtplib
 
@@ -158,3 +163,13 @@ def translate(language):
     finally:
         activate(cur_language)
     return text
+
+class ExitPointViewSet(viewsets.ModelViewSet):
+    queryset = ExitPoint.objects.all()
+    serializer_class = ExitPointSerializer
+    permission_classes = [AllowAny]
+    Model = ExitPoint
+
+    def get_queryset(self):
+        qs = ExitPoint.objects.all()
+        return qs

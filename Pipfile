@@ -7,8 +7,12 @@ name = "pypi"
 django = "*"
 python-decouple = "3.5"
 django-countries = "7.2.1"
+djangorestframework = "3.12.4"
 
 [dev-packages]
 
 [requires]
 python_version = "3.9"
+
+#TODO: dodać do instrukcji pipenv install
+#TODO: udostepnic plik .env i dodać do głównego katalogu

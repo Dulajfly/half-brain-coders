@@ -17,7 +17,7 @@ class ExitPoint(models.Model):
         ('NR', _('NOT RECOMMENDED'))
     ]
     name = models.CharField(max_length=255, null=True, blank=True)
-    country = CountryField(blank=True)
+    # country = CountryField(blank=True)
     tracking_difficulty_level = models.CharField(verbose_name=_('Tracking skill level'), max_length=200, choices=DIFFICULT_CHOICES, blank=True, null=True)
     wingsuit_difficulty_level =models.CharField(max_length=200, choices=DIFFICULT_CHOICES, blank=True, null=True)
     rock_drop_second = models.PositiveSmallIntegerField(validators=[MaxValueValidator(120), MinValueValidator(1)], null=True, blank=True)
