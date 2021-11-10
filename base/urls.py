@@ -1,9 +1,12 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register(r'exitpoint', ExitPointViewSet)
 
 urlpatterns = [
     path('', index, name='base'),
@@ -19,4 +22,7 @@ urlpatterns = [
     path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(template_name='user/reset_password_done.html'), name='password_reset_done'),
     path('reset_password/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='user/reset_password_form.html'), name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user/reset_password_complete.html'), name='password_reset_complete'),
+
+    url('api/', include(router.urls))
+
 ]
