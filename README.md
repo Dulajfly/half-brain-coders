@@ -1,8 +1,7 @@
 
 # Projekt Zaawansowane aplikacje internetowe
 
-#### Tu będzie logo xD
-![Logo](https://paczaizm.pl/content/wp-content/uploads/dziekan-rektor-studenci-malpy-9k-zarazen-where-zdalne.jpg)
+![Logo](https://user-images.githubusercontent.com/64263887/145399339-60ac6bb4-910f-46aa-8577-0b771d2543c3.png)
 
 
 ## Komendy
