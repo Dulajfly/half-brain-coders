@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import get_language, activate
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text, force_str
+from django.contrib.auth.hashers import make_password
 
 from django.views.generic.edit import FormView
 
@@ -14,9 +15,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
+from rest_framework import generics, permissions, mixins
+from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.decorators import api_view, permission_classes
+
 from .models import *
 from .serializers import *
-from rest_framework.permissions import AllowAny
 
 from .forms import RegisterForm, ExitPointForm
 import smtplib
@@ -154,6 +160,8 @@ def index(request):
     # user = request.
     return render(request, 'index.html', {'projekt': projekt, 'trans': trans, 'slowa': slowa})
 
+def map_render(request):
+    return render(request, 'map.html')
 
 def translate(language):
     cur_language = get_language()
@@ -164,6 +172,13 @@ def translate(language):
         activate(cur_language)
     return text
 
+
+
+# API
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
 class ExitPointViewSet(viewsets.ModelViewSet):
     queryset = ExitPoint.objects.all()
     serializer_class = ExitPointSerializer
@@ -173,3 +188,39 @@ class ExitPointViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         qs = ExitPoint.objects.all()
         return qs
+
+class RegisterUser(generics.GenericAPIView):
+    serializer_class = UserSerializerWithToken
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        try:
+            user = User.objects.create(
+                username = data['name'],
+                email = data['email'],
+                password = make_password(data['password'])
+            )
+            serializer = UserSerializerWithToken(user, many=False)
+            return Reponse(serializer.data)
+        except:
+            message = {'detail': 'Error blabla'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def registerUserFun(request):
+    data = request.data
+
+
+    try:
+        user = User.objects.create(
+            username = data['username'],
+            email = data['email'],
+            password = make_password(data['password'])
+        )
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail': 'User with this email already exists'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
