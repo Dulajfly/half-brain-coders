@@ -1,10 +1,43 @@
 {% extends 'index.html' %}
 {% block content %}
-    <h1>Exit Point Form</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create">
-    </form>
+    <div class="col">
+        <form class="col-sm" method="post">
+            <h1 class="col-sm">Exit Point Form</h1>
+            {% csrf_token %}
+            <div class="form-control">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-control">
+                {{ form.tracking_difficulty_level.label_tag }}
+                {{ form.tracking_difficulty_level }}
+            </div>
+            <div class="form-control">
+                {{ form.wingsuit_difficulty_level.label_tag }}
+                {{ form.wingsuit_difficulty_level }}
+            </div>
+            <div class="form-control">
+                {{ form.rock_drop_second.label_tag }}
+                {{ form.rock_drop_second }}
+            </div>
+            <div class="form-control">
+                {{ form.rock_drop_altitude.label_tag }}
+                {{ form.rock_drop_altitude }}
+            </div>
+            <div class="form-control">
+                {{ form.landing_altitude.label_tag }}
+                {{ form.landing_altitude }}
+            </div>
+            <div class="form-control">
+                {{ form.lon.label_tag }}
+                {{ form.lon }}
+            </div>
+            <div class="form-control">
+                {{ form.lat.label_tag }}
+                {{ form.lat }}
+            </div>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+    {% include 'map.html' %}
 {% endblock content %}

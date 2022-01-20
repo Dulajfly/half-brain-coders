@@ -1,3 +1,8 @@
 h1{
     color: darkcyan;
 }
+
+#map{
+    width: 65vw;
+    height:95vh;
+}
