@@ -18,6 +18,8 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', activate_account, name='activate_account'),
 
     path('exitpoint/', ExitPointView.as_view(), name='exitpoint'),
+    path('exitpoint/list/', ExitPointList.as_view(), name='exitpoint_list'),
+    path('detail/<int:pk>/', ExitPointDetail.as_view(), name='exitpoint_detail'),
     path('map/', map_render, name='map'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='user/reset_password.html'), name='reset_password'),

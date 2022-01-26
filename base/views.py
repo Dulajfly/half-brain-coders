@@ -6,7 +6,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text, force_str
 from django.contrib.auth.hashers import make_password
 
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView
@@ -113,6 +115,28 @@ class ExitPointView(LoginRequiredMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('base')
 
+class ExitPointList(LoginRequiredMixin, ListView):
+    models = ExitPoint
+    context_object_name = 'exitpoints'
+    template_name = 'exitpoint_list.html'
+
+    def get_queryset(self):
+        return ExitPoint.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['count'] = context['exitpoints'].count()
+
+        return context
+
+class ExitPointDetail(LoginRequiredMixin, DetailView):
+    model = ExitPoint
+    context_object_name = 'exitpoint'
+    template_name = 'exitpoint_detail.html'
+
+# class ExitPointUpdate(LoginRequiredMixin, UpdateView):
+#     model = ExitPoint
+#     fields =
 
 # def mail_wysylam(request):
 #     subject = 'Moj temat'

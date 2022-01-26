@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% load i18n %}
+
+{% block content %}
+
+
+tu bedzie lista exitpoint!
+    {% for exitpoint in exitpoints %}
+        {{ exitpoint }}
+    {% endfor %}
+
+
+{% endblock content %}
