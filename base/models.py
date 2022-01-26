@@ -27,5 +27,5 @@ class ExitPoint(models.Model):
     lon = models.CharField(max_length=255, null=True, blank=True)
     lat = models.CharField(max_length=255, null=True, blank=True)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name

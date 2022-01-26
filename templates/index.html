@@ -23,12 +23,13 @@
 {#    {{ trans }}#}
 {#    {{ slowa }}#}
 {#{% endblock helper %}#}
-<div style="display: flex">
-    {% block content %}
+    {% include 'menu.html' %}
 
+    {% block content %}
+        {% include 'maxExitPoint.html' %}
     {% endblock content %}
     {#    <p><a href="{% url 'logout' %}">logout</a></p>#}
-</div>
+
 {#{% block app %}#}
 {#<p><a href="{% url 'exitpoint' %}">add exit point</a></p>#}
 {##}
@@ -51,7 +52,6 @@
 {#    {% csrf_token %}#}
 {#    <button type="submit">Wyslij email</button>#}
 {#</form>#}
-    <script src="{% static 'main.js' %}"></script>
 
 </body>
 </html>
