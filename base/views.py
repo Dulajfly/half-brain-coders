@@ -62,7 +62,6 @@ def activate_account(request, uidb64, token):
         return HttpResponse('Invalid link')
 
 
-# Neovo123!
 class RegisterPage(FormView):
     template_name = 'user/register.html'
     form_class = RegisterForm
@@ -99,7 +98,7 @@ class RegisterPage(FormView):
             settings.EMAIL_HOST_USER,
             [user.email],
         )
-        email.fail_silently = False
+        email.fail_silently = True
         email.send()
 
 
