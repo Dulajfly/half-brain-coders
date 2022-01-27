@@ -1,18 +1,30 @@
 {% load i18n %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
 <h1>{% trans "Register" %}</h1>
 
-    <form method="post">
-        {% csrf_token %}
-{#        {{ form.as_p }}#}
-        {% for field in form %}
+<form method="post">
+    {% csrf_token %}
+    {#        {{ form.as_p }}#}
+    {% for field in form %}
+        <div class="form-group form-outline">
             {{ field.errors }}
             {{ field.label_tag }}
-            <p>{{ field }}</p>
-                {% if field.help_text %}
-                <p>{{ field.help_text|safe }}</p>
-                {% endif %}
-        {% endfor %}
-        {{ form.error.username }}
-    <input type="submit" value="Register">
-    </form>
-<a href={% url 'login' %}>Login</a>
+            <p class="form-group form-outline">{{ field }}</p>
+        </div>
+
+        {% if field.help_text %}
+            <p>{{ field.help_text|safe }}</p>
+        {% endif %}
+    {% endfor %}
+    {{ form.error.username }}
+    <div class="form-group">
+        <input class="btn btn" type="submit" value="Register">
+    </div>
+    <a class="btn btn-success" href={% url 'login' %}>Login</a>
+</form>
+

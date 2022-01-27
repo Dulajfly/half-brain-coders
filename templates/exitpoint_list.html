@@ -4,9 +4,24 @@
 {% block content %}
 
 
-tu bedzie lista exitpoint!
+    <h1 class="text-center">ExitPoint List</h1>
     {% for exitpoint in exitpoints %}
-        {{ exitpoint }}
+        <div class="text-center form-group">
+        <div class="text-center bg-info form-group">
+            <label>Name</label>
+            {{ exitpoint.name }}
+        </div>
+        <div class="text-center form-group">
+            <label>tracking_difficulty_level</label>
+            {{ exitpoint.tracking_difficulty_level }}
+        </div>
+        <div class="text-center form-group">
+            <label>wingsuit_difficulty_level</label>
+            {{ exitpoint.wingsuit_difficulty_level }}
+        </div>
+        <a class="btn btn-outline-secondary text-center" href="{% url 'exitpoint_detail' exitpoint.id %}">Details</a>
+        </div>
+        <br>
     {% endfor %}
 
 
