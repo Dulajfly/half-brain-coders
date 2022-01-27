@@ -23,12 +23,12 @@
                                 {{ form.username }}
                             </div>
                             <div class="form-group">
-                                <label for="">Hasło</label>
+                                <label for="">{% trans 'Password' %}</label>
                                 {{ form.password }}
                             </div>
                             <input class="btn btn-block btn-primary" type="submit" value="Login">
                         </form>
-                        <p><a href="{% url 'register' %}">register</a></p>
+                        <p><a href="{% url 'register' %}">{% trans 'Register' %}</a></p>
                     </div>
                 </div>
             </div>
