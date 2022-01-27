@@ -2,9 +2,14 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>Exitpoint: {{ exitpoint }}</h1>
-    <h2>blabla: {{ exitpoint.name }}</h2>
-    <h2>blbla: {{ exitpoint.tracking_difficulty_level }}</h2>
+    <h1 class="display-1">Exitpoint: {{ exitpoint.name }}</h1>
+    <h2 class="text-muted">Tracking Level: {{ exitpoint.tracking_difficulty_level }}</h2>
+    <h2 class="text-muted">Wingsuit Level: {{ exitpoint.wingsuit_difficulty_level }}</h2>
+    <h2 class="text-muted">Rock Drop Second: {{ exitpoint.rock_drop_second }}</h2>
+    <h2 class="text-muted">Rock Drop Altitude: {{ exitpoint.rock_drop_altitude }}</h2>
+    <h2 class="text-muted">Landing Altitude: {{ exitpoint.landing_altitude }}</h2>
+    <h6 class="lead">Exit Point Longitude: {{ exitpoint.lon }}</h6>
+    <h6 class="lead">Exit Point Latitude: {{ exitpoint.lat }}</h6>
 
 
 {% endblock content %}

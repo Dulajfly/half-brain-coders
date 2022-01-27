@@ -1,3 +1,22 @@
+
+
+x = '/pl/api/exitpoint/'
+fetch(x)
+  .then(response => response.json())
+  .then(data => showMarkers(data))
+
+const showMarkers =(data)=>{
+    for(var i=0; i<data.length; i++){
+        marker = new L.marker([data[i][1]])
+    }
+}
+
+
+
+
+
+
+
 var map = L.map('mapExitPoint', { zoomControl: false }).setView([51.505, -0.09], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,4 +35,5 @@ map.on('click', function (e) {
   document.getElementById('id_lon').value = lng;
   document.getElementById('id_lat').value = lat;
 });
+
 

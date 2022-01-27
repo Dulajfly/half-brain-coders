@@ -9,7 +9,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class ExitPointSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExitPoint
-        fields = ['name', 'tracking_difficulty_level', 'wingsuit_difficulty_level', 'rock_drop_second', 'rock_drop_altitude', 'landing_altitude']
+        fields = ['name', 'tracking_difficulty_level', 'wingsuit_difficulty_level', 'rock_drop_second', 'rock_drop_altitude', 'landing_altitude', 'lon', 'lat']
 
 
 # class UserSerializerWithToken(serializers.ModelSerializer):
