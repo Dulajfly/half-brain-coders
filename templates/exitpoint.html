@@ -1,46 +1,52 @@
 {% extends 'index.html' %}
+{% load static %}
 {% block content %}
-    <div style="display: flex; flex-direction: row; " >
-        <div class="" style="width: 50vw;" >
-            <form class="col-sm" method="post">
-                <h1 class="text-left">Exit Point Form</h1>
-                {% csrf_token %}
-                <div class="form-group">
-                    {{ form.name.label_tag }}
-                    {{ form.name }}
+    <div style="display: flex; flex-direction: row; ">
+        <div class="" style="width: 50vw;">
+            <form class="col " method="post">
+                <div class="text-left">
+                    <h1 class="text-left">Exit Point Form</h1>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.tracking_difficulty_level.label_tag }}
+                        {{ form.tracking_difficulty_level }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.wingsuit_difficulty_level.label_tag }}
+                        {{ form.wingsuit_difficulty_level }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.rock_drop_second.label_tag }}
+                        {{ form.rock_drop_second }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.rock_drop_altitude.label_tag }}
+                        {{ form.rock_drop_altitude }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.landing_altitude.label_tag }}
+                        {{ form.landing_altitude }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.lon.label_tag }}
+                        {{ form.lon }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.lat.label_tag }}
+                        {{ form.lat }}
+                    </div>
                 </div>
-                <div class="form-group">
-                    {{ form.tracking_difficulty_level.label_tag }}
-                    {{ form.tracking_difficulty_level }}
+                <div class="text-center">
+                    <input class="btn btn-primary col-md-6" type="submit" value="Create">
                 </div>
-                <div class="form-group">
-                    {{ form.wingsuit_difficulty_level.label_tag }}
-                    {{ form.wingsuit_difficulty_level }}
-                </div>
-                <div class="form-group">
-                    {{ form.rock_drop_second.label_tag }}
-                    {{ form.rock_drop_second }}
-                </div>
-                <div class="form-group">
-                    {{ form.rock_drop_altitude.label_tag }}
-                    {{ form.rock_drop_altitude }}
-                </div>
-                <div class="form-group">
-                    {{ form.landing_altitude.label_tag }}
-                    {{ form.landing_altitude }}
-                </div>
-                <div class="form-group">
-                    {{ form.lon.label_tag }}
-                    {{ form.lon }}
-                </div>
-                <div class="form-group">
-                    {{ form.lat.label_tag }}
-                    {{ form.lat }}
-                </div>
-                <input class="btn btn-primary" type="submit" value="Create">
             </form>
         </div>
         {% include 'maxExitPoint.html' %}
     </div>
+
 {% endblock content %}
 

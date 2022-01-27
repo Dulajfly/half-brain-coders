@@ -5,23 +5,34 @@
 
 
     <h1 class="text-center">ExitPoint List</h1>
-    {% for exitpoint in exitpoints %}
-        <div class="text-center form-group">
-        <div class="text-center form-group">
-            {{ exitpoint.name }}
-        </div>
-        <div class="text-center form-group">
-            <label>tracking_difficulty_level</label>
-            {{ exitpoint.tracking_difficulty_level }}
-        </div>
-        <div class="text-center form-group">
-            <label>wingsuit_difficulty_level</label>
-            {{ exitpoint.wingsuit_difficulty_level }}
-        </div>
-        <a class="btn btn-outline-secondary text-center" href="{% url 'exitpoint_detail' exitpoint.id %}">Details</a>
-        </div>
-        <br>
-    {% endfor %}
-
-
+    {#        <div class="text-center form-group">#}
+    {#        <div class="text-center form-group">#}
+    {#            {{ exitpoint.name }}#}
+    {#        </div>#}
+    {#        <div class="text-center form-group">#}
+    {#            <label>tracking_difficulty_level</label>#}
+    {#            {{ exitpoint.tracking_difficulty_level }}#}
+    {#        </div>#}
+    {#        <div class="text-center form-group">#}
+    {#            <label>wingsuit_difficulty_level</label>#}
+    {#            {{ exitpoint.wingsuit_difficulty_level }}#}
+    {#        </div>#}
+    {#        <a class="btn btn-outline-secondary text-center" href="{% url 'exitpoint_detail' exitpoint.id %}">Details</a>#}
+    {#        </div>#}
+    {#        <br>#}
+    <div class="row">
+        {% for exitpoint in exitpoints %}
+            <div class="card col-sm-3" style="width: 18rem;">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">{{ exitpoint.name }}</h5>
+                    <div class="col text-center">
+                        <p class="card-text row-sm-2">{{ exitpoint.wingsuit_difficulty_level }}</p>
+                        <p class="card-text row-sm-2">{{ exitpoint.wingsuit_difficulty_level }}</p>
+                    </div>
+                    <a href="{% url 'exitpoint_detail' exitpoint.id %}"
+                       class="btn btn-outline-secondary text-center">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock content %}

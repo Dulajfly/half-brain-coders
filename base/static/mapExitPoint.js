@@ -37,3 +37,22 @@ map.on('click', function (e) {
 });
 
 
+
+
+const id_name = document.getElementById('id_name');
+const id_tracking_difficulty_level = document.getElementById('id_tracking_difficulty_level');
+const id_wingsuit_difficulty_level = document.getElementById('id_wingsuit_difficulty_level');
+const id_rock_drop_second = document.getElementById('id_rock_drop_second');
+const id_rock_drop_altitude = document.getElementById('id_rock_drop_altitude');
+const id_landing_altitude = document.getElementById('id_landing_altitude');
+const id_lon = document.getElementById('id_lon');
+const id_lat = document.getElementById('id_lat');
+console.log(id_name)
+id_name.classList.add('form-control')
+id_tracking_difficulty_level.classList.add('form-control')
+id_wingsuit_difficulty_level.classList.add('form-control')
+id_rock_drop_second.classList.add('form-control')
+id_rock_drop_altitude.classList.add('form-control')
+id_lon.classList.add('form-control')
+id_landing_altitude.classList.add('form-control')
+id_lat.classList.add('form-control')
